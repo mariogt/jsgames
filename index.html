@@ -22,6 +22,14 @@
     <h1>Entretenimientos <a href="#" onclick="starwars();return false;">StarWars Trivia</a></h1>
     <br>
     <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script>
+    <br>
+
+    <form onsubmit="return false">
+        <label for="input"></label>Enter your starwars guess: </label>
+        <input id="textbox" placeholder="enter your guess.." required>
+        <input type="submit" onclick="starwars()" value="Submit">
+    </form>
+
 </body>
 
 </html>

@@ -1,9 +1,8 @@
-var msg = ".Welcome to MarioGT Software, developer of useful Apps for macOS & iOS. My mission is straightforward and simple, programming lightweight software, not too resource-hungry, and above all, enrich your digital life 🤣🤣.";
+var msg = "Welcome to MarioGT Software, developer of useful Apps for macOS & iOS. My mission is straightforward and simple, programming lightweight software, not too resource-hungry, and above all, enrich your digital life 🤣🤣.";
 
 var userName = "void";
 var matchCounter = 0;
 var lista_almacen = new Array;
-var lista_sugerencias = new Array;
 
 var lista_starwars = new Array;
 lista_starwars[0] = "darth vader";
@@ -15,7 +14,8 @@ lista_starwars[5] = "leia";
 lista_starwars[6] = "luke";
 lista_starwars[7] = "obiwan";
 
-lista_sugerencias = [...lista_starwars];
+var lista_sugerencias = [...lista_starwars];
+
 
 function askName() {
     userName = prompt("Cual es tu nombre?", "");
@@ -30,24 +30,26 @@ function askName() {
 }
 
 function starwars() {
+    var userGuess = document.getElementById("textbox").value;
+
     var isGuessInList = false;
     if (matchCounter == lista_starwars.length) {
         alert("YOU ALREADY WON STARWARS TRIVIA!");
     } else {
-        var userGuess = prompt("StarWars Trivia, trata de adivinar mis " + lista_starwars.length + " personajes preferidos de la saga (escribe en minusculas) ?", "");
+        //var userGuess = prompt("StarWars Trivia, trata de adivinar mis " + lista_starwars.length + " personajes preferidos de la saga (escribe en minusculas) ?", "");
         if (userGuess == null) {
             alert("Te diste por vencido!");
         } else {
             if (userGuess == "") {
                 alert("no recuerdas ninguno! intenta nuevamente");
-                starwars();
+                //starwars();
             } else {
                 lista_almacen.forEach(inFunction);
                 function inFunction(item, index) {
                     if (userGuess == item) {
                         alert("ya digiste ese personaje, trata de nuevo!");
                         isGuessInList = true;
-                        starwars();
+                        //starwars();
                     }
                 }
 
@@ -58,12 +60,12 @@ function starwars() {
                             lista_almacen[i] = lista_starwars[i];
                             isGuessInList = true;
 
-                            alert("ahh " + userGuess + " es uno de los de mi lista de " + lista_starwars.length + "  personajes, eres un genio " + userName + "!" + " has acertado a " + matchCounter + " de " + lista_starwars.length + " personajes");
+                            alert(userGuess + " es uno de los de mi lista de " + lista_starwars.length + "  personajes, eres un genio " + userName + "!" + " has acertado a " + matchCounter + " de " + lista_starwars.length + " personajes");
 
                             if (matchCounter == lista_starwars.length) {
                                 alert("!!!" + userName + " GANASTE THE STARWARS TRIVIA!");
                             } else {
-                                starwars();
+                                //starwars();
                             }
                         }
                     }
@@ -81,8 +83,8 @@ function starwars() {
                         var randomInt = parseInt(rand_num);
                         var theOne = lista_sugerencias[randomInt];
 
-                        alert(userGuess + "ahh ese es tu favorito, bueno el mio comienza con: " + theOne.charAt(0) + theOne.charAt(1));
-                        starwars();
+                        alert(userGuess + " Ese es tu favorito? bueno el mio comienza con: " + theOne.charAt(0) + theOne.charAt(1));
+                        //starwars();
                     }
                 }
             }
