@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="main.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.22.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <link rel="stylesheet" href="style.css">
+    </link>
+    <title>JavaScript Hacks</title>
+</head>
+
+<body onload="startScroller();">
+    Bienvenido
+    <script language="JavaScript" type="text/javascript">document.writeln(askName());</script>
+    <form name="scrollForm" onsubmit="return false;">
+        <!--This editable value is the size of the text box. -->
+        <input type="text" name="scrolling_message" value="" size="200">
+    </form>
+    <br>
+    <h1>Entretenimientos <a href="#" onclick="starwars();return false;">StarWars Trivia</a></h1>
+    <br>
+    <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script>
+</body>
+
+</html>
