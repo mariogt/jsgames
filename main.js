@@ -20,11 +20,7 @@ var lista_sugerencias = [...lista_starwars];
 function askName() {
     userName = prompt("Cual es tu nombre?", "");
     if (userName.length == 0 || userName == null) {
-        userName = "monkey"
-    } else {
-        if (userName == "mariogore") {
-            alert("hola jefe");
-        }
+        userName = "Code Monkey 🐵"
     }
     return userName;
 }
@@ -34,22 +30,19 @@ function starwars() {
 
     var isGuessInList = false;
     if (matchCounter == lista_starwars.length) {
-        alert("YOU ALREADY WON STARWARS TRIVIA!");
+        alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
     } else {
-        //var userGuess = prompt("StarWars Trivia, trata de adivinar mis " + lista_starwars.length + " personajes preferidos de la saga (escribe en minusculas) ?", "");
         if (userGuess == null) {
             alert("Te diste por vencido!");
         } else {
             if (userGuess == "") {
-                alert("no recuerdas ninguno! intenta nuevamente");
-                //starwars();
+                alert("No recuerdas ninguno? intenta nuevamente");
             } else {
                 lista_almacen.forEach(inFunction);
                 function inFunction(item, index) {
                     if (userGuess == item) {
-                        alert("ya digiste ese personaje, trata de nuevo!");
+                        alert("Ya dijiste ese personaje, trata de nuevo!");
                         isGuessInList = true;
-                        //starwars();
                     }
                 }
 
@@ -60,12 +53,10 @@ function starwars() {
                             lista_almacen[i] = lista_starwars[i];
                             isGuessInList = true;
 
-                            alert(userGuess + " es uno de los de mi lista de " + lista_starwars.length + "  personajes, eres un genio " + userName + "!" + " has acertado a " + matchCounter + " de " + lista_starwars.length + " personajes");
+                            alert("Excelente! " + userGuess + " es uno de los de mi lista de personajes Starwars, eres un mago " + userName + "!" + " has acertado a " + matchCounter + " de " + lista_starwars.length + " de mi lista");
 
                             if (matchCounter == lista_starwars.length) {
-                                alert("!!!" + userName + " GANASTE THE STARWARS TRIVIA!");
-                            } else {
-                                //starwars();
+                                alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
                             }
                         }
                     }
@@ -83,8 +74,7 @@ function starwars() {
                         var randomInt = parseInt(rand_num);
                         var theOne = lista_sugerencias[randomInt];
 
-                        alert(userGuess + " Ese es tu favorito? bueno el mio comienza con: " + theOne.charAt(0) + theOne.charAt(1));
-                        //starwars();
+                        alert(userGuess + " Ese es tu favorito? bueno el mio comienza con las letras: " + theOne.charAt(0) + theOne.charAt(1));
                     }
                 }
             }
