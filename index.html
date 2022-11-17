@@ -13,6 +13,7 @@
 </head>
 
 <body onload="startScroller()">
+    <p id="timer">...</p>
     <div class="c0">
         <kbd>
             <script>document.writeln(askName());</script>
@@ -23,9 +24,8 @@
         <input type="text" id="scrollerBox" name="scrolling_message" size="80">
     </form>
     <br>
-    <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script>
+    <!-- <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script> -->
     <br>
-
     <div class="c1">
         <form onsubmit="return false">
             <label for="input"></label>
@@ -33,15 +33,15 @@
                     <script>document.writeln(getListaStarwarsLenght());</script> Personajes de Starwars:
                 </kbd></div>
             <input type="text" id="textbox" placeholder="...">
-            <input type="submit" id="sendbutton" onclick="starwars()" value="GO">
+            <input type="submit" id="sendbutton" onclick="starwars();setTimeout(fadeHtmlText, 3000);timeInterval()"
+                value="GO">
         </form>
     </div>
     <!-- <br>
     <br>
     <br>
     <br>
-    <input type="button" onclick="returnListaAlmacen();return false" value="go">
-    <input type="button" id="test1" onclick="testJquery()" value="test1">
+    <input type="button" id="test1" onclick="timeInterval()" value="test1">
     <input type="button" id="test2" onclick="" value="test2">
     <input type="button" id="test3" onclick="" value="test3"> -->
 </body>

@@ -1,10 +1,17 @@
+// reloj tiempo real
+// var timerId = setInterval(() => {
+//     getTime()
+// }, 1000);
+
+// timeInterval(100);
+
 var msg = "Adivina los nombres de los personajes de Starwars, escribe el nombre en la caja de texto y presiona la tecla \"Enter\" o el boton \"GO\". Cada vez que falles te dare una pista con las dos primeras letras de algun personaje de mi lista, buena suerte 🐱";
 
 var userName = new String;
 var matchCounter = 0;
 var userGuess;
 
-var namesArray = new Array(
+const namesArray = new Array(
     'PsychoCherry🍒',
     'Mintymint☘️',
     'lemonSquezee🍋',
@@ -45,7 +52,7 @@ var namesArray = new Array(
     'darklight🕯️',
     'headphoneman🙅',
     'headphonewoman🙅‍♀️',
-    'snakex👽',
+    'snakex 🐍',
     'lalafanfan👻',
     'beepbeep👾',
     'sakuratree🌳',
@@ -56,13 +63,13 @@ var namesArray = new Array(
     'vloco🕺',
 );
 
-var listaMusica = new Array(
+const listaMusica = new Array(
     '<midi-player src=\"midis/jazz.mid\" sound-font></midi-player>',
     '<midi-player src=\"midis/cool.mid\" sound-font></midi-player>',
     '<midi-player src=\"midis/bios.mid\" sound-font></midi-player>',
 );
 
-var listaStarwars = new Array(
+const listaStarwars = new Array(
     'darth vader',
     'yoda',
     'boba fett',
@@ -73,7 +80,7 @@ var listaStarwars = new Array(
     'obiwan',
     'lando'
 );
-var listaStarwarsCounter = listaStarwars.length;
+const listaStarwarsCounter = listaStarwars.length;
 
 var listaAlmacen = new Array;
 var listaSugerencias = [...listaStarwars];
@@ -101,7 +108,7 @@ function starwars() {
             alert("Te diste por vencido!");
         } else {
             if (userGuess == "") {
-                alert("No recuerdas ninguno? intenta nuevamente");
+                //alert("No recuerdas ninguno? intenta nuevamente");
             } else {
                 listaAlmacen.forEach(inFunction);
                 function inFunction(item, index) {
@@ -137,7 +144,7 @@ function starwars() {
                     if (!isGuessInList) {
                         var theOne = randArrayItem(listaSugerencias);
 
-                        $("body").append("<div class=\"responseError\">" + "💩 " + userGuess.toUpperCase() + " 💩  " + "Ese es tu favorito? el mio comienza con las letras 👉" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "</div>");
+                        $("body").append("<div class=\"responseError\">" + "💩 " + userGuess.toUpperCase() + " 💩  " + "Ese es tu favorito? el mio comienza con las letras 👉" + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con la letra: " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
                     }
                 }
             }
@@ -163,9 +170,7 @@ function randMusica() {
 function startScroller() {
     document.scrollForm.scrolling_message.value = msg
     msg = msg.substring(1, msg.length) + msg.substring(0, 1)
-    // This editable setting dictates how quickly
-    // each character moves across the scroll box
-    // (ex. 150=.15 seconds).
+    // (scroll velocity 150=.15 seconds).
     setTimeout("startScroller()", 200)
 }
 
@@ -177,9 +182,54 @@ function randArrayItem(array) {
 
 function testJquery() {
     $(document).ready(function () {
-        $("#test2").toggle();
+        $("#respError").toggle();
         $(window).resize(function () {
             $("body").prepend("<div>" + $(window).width() + "</div>");
         });
     });
 }
+
+function fadeHtmlText() {
+    $(document).ready(function () {
+        $(".response").fadeOut("slow", function () {
+            // Animation complete
+        });
+        $(".responseError").fadeOut("slow", function () {
+            // Animation complete
+        });
+        $(".responseDuplicate").fadeOut("slow", function () {
+            // Animation complete
+        });
+    });
+}
+
+function getTime() {
+    var currentDate = new Date();
+    var currentTime = currentDate.toLocaleTimeString();
+    document.getElementById("timer").innerHTML = currentTime;
+}
+
+var timeCounter = 10;
+var progressBarId;
+function timeInterval() {
+    if (progressBarId == null) {
+        $(document).ready(function () {
+            progressBarId = setInterval(displayTimeProgress, 1000);
+        });
+    }
+}
+
+function displayTimeProgress() {
+    document.getElementById("timer").innerHTML = timeCounter;
+    timeCounter -= 1;
+    if (timeCounter == 0) {
+        $("#textbox").fadeOut("fast", function () {
+        });
+        $("#sendbutton").fadeOut("fast", function () {
+        });
+        document.getElementById("timer").innerHTML = "FIN";
+        clearInterval(progressBarId);
+        timeCounter = 0;
+    }
+}
+

@@ -38,6 +38,15 @@ img:hover {
 
 /* ID */
 
+#timer {
+    text-align: center;
+    font-size: 40pt;
+    font-weight: bold;
+    color: #ff00ff;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
 #scrollerBox {
     text-align: center;
     font-size: 18pt;
@@ -52,6 +61,7 @@ img:hover {
     width: 200;
     font-size: 30pt;
     font-weight: bold;
+    text-transform: uppercase;
     color: #d900ff;
     background-color: #1c2833;
 }
