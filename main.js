@@ -1,35 +1,100 @@
-var msg = "Welcome to MarioGT Software, developer of useful Apps for macOS & iOS. My mission is straightforward and simple, programming lightweight software, not too resource-hungry, and above all, enrich your digital life 🤣🤣.";
+var msg = "Adivina los nombres de los personajes de Starwars, escribe el nombre en la caja de texto y presiona la tecla \"Enter\" o el boton \"GO\". Cada vez que falles te dare una pista con las dos primeras letras de algun personaje de mi lista, buena suerte 🐱";
 
-var userName = "void";
+var userName = new String;
 var matchCounter = 0;
-var lista_almacen = new Array;
+var userGuess;
 
-var lista_starwars = new Array;
-lista_starwars[0] = "darth vader";
-lista_starwars[1] = "yoda";
-lista_starwars[2] = "boba fett";
-lista_starwars[3] = "han solo";
-lista_starwars[4] = "jaba";
-lista_starwars[5] = "leia";
-lista_starwars[6] = "luke";
-lista_starwars[7] = "obiwan";
+var namesArray = new Array(
+    'PsychoCherry🍒',
+    'Mintymint☘️',
+    'lemonSquezee🍋',
+    'MaybeKoala🐨',
+    'CoolMarionette🧸',
+    'LocoMantis🪳',
+    'GoingShine🌞',
+    'twicyland🐲',
+    'Summer girl👙',
+    'summerboy🏄',
+    'summerperson🏊‍♂️',
+    'snowinside⛄',
+    'realisticbot🤖',
+    'babypolice🚨',
+    'tomatotea🍅',
+    'mockingbird🐦',
+    'fallingberrys🍒',
+    'strawberryjuice🍹',
+    'toxicpotion♨️',
+    'latermaker🛠️',
+    'snipperdog🐶',
+    'slimyhands👏',
+    'creativeworld💭',
+    'Catman🐈‍⬛',
+    'Bomblow💣',
+    'Everstar⭐',
+    'Mixlunch🥞',
+    'Mrwolf🐺',
+    'Juicypewpie🧁',
+    'Loconacat🙀',
+    'Kittencat🐈',
+    'nachotaco🌮',
+    'mindgatorade🧋',
+    'sunshineglitter🫧',
+    'starwash🚀',
+    'happytaco🌯',
+    'bluewhite💙',
+    'darklight🕯️',
+    'headphoneman🙅',
+    'headphonewoman🙅‍♀️',
+    'snakex👽',
+    'lalafanfan👻',
+    'beepbeep👾',
+    'sakuratree🌳',
+    'heartclip💖',
+    'vman👨‍💼',
+    'vwoman👩‍💼',
+    'vperson🤹',
+    'vloco🕺',
+);
 
-var lista_sugerencias = [...lista_starwars];
+var listaMusica = new Array(
+    '<midi-player src=\"midis/jazz.mid\" sound-font></midi-player>',
+    '<midi-player src=\"midis/cool.mid\" sound-font></midi-player>',
+    '<midi-player src=\"midis/bios.mid\" sound-font></midi-player>',
+);
 
+var listaStarwars = new Array(
+    'darth vader',
+    'yoda',
+    'boba fett',
+    'han solo',
+    'jaba',
+    'leia',
+    'luke',
+    'obiwan',
+    'lando'
+);
+var listaStarwarsCounter = listaStarwars.length;
 
+var listaAlmacen = new Array;
+var listaSugerencias = [...listaStarwars];
+
+function getListaStarwarsLenght() {
+    return listaStarwarsCounter;
+}
 function askName() {
-    userName = prompt("Cual es tu nombre?", "");
+    //userName = prompt("Cual es tu nombre?", "");
     if (userName.length == 0 || userName == null) {
-        userName = "Code Monkey 🐵"
+        userName = randArrayItem(namesArray);
     }
     return userName;
 }
 
 function starwars() {
-    var userGuess = document.getElementById("textbox").value;
+    userGuess = document.getElementById("textbox").value;
+    document.getElementById("textbox").value = '';
 
     var isGuessInList = false;
-    if (matchCounter == lista_starwars.length) {
+    if (matchCounter == listaStarwarsCounter) {
         alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
     } else {
         if (userGuess == null) {
@@ -38,43 +103,41 @@ function starwars() {
             if (userGuess == "") {
                 alert("No recuerdas ninguno? intenta nuevamente");
             } else {
-                lista_almacen.forEach(inFunction);
+                listaAlmacen.forEach(inFunction);
                 function inFunction(item, index) {
                     if (userGuess == item) {
-                        alert("Ya dijiste ese personaje, trata de nuevo!");
+                        $("body").append("<div class=\"responseDuplicate\">" + "🐵 Ya dijiste ese personaje, trata de nuevo! 🐵" + "</div>");
                         isGuessInList = true;
                     }
                 }
 
                 if (!isGuessInList) {
-                    for (i = 0; i < lista_starwars.length; i++) {
-                        if (userGuess == lista_starwars[i]) {
+                    for (i = 0; i < listaStarwarsCounter; i++) {
+                        if (userGuess == listaStarwars[i]) {
                             matchCounter++;
-                            lista_almacen[i] = lista_starwars[i];
+                            listaAlmacen.push(listaStarwars[i]);
                             isGuessInList = true;
 
-                            alert("Excelente! " + userGuess + " es uno de los de mi lista de personajes Starwars, eres un mago " + userName + "!" + " has acertado a " + matchCounter + " de " + lista_starwars.length + " de mi lista");
+                            $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " de " + listaStarwarsCounter + " personajes de mi lista" + "</div>");
 
-                            if (matchCounter == lista_starwars.length) {
+                            if (matchCounter == listaStarwarsCounter) {
                                 alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
                             }
                         }
                     }
 
-                    for (i = 0; i < lista_almacen.length; i++) {
-                        for (j = 0; j < lista_sugerencias.length; j++) {
-                            if (lista_sugerencias[j] == lista_almacen[i]) {
-                                lista_sugerencias.splice(j, 1);
+                    for (i = 0; i < listaAlmacen.length; i++) {
+                        for (j = 0; j < listaSugerencias.length; j++) {
+                            if (listaSugerencias[j] == listaAlmacen[i]) {
+                                listaSugerencias.splice(j, 1);
                             }
                         }
                     }
 
                     if (!isGuessInList) {
-                        var rand_num = Math.random() * lista_sugerencias.length;
-                        var randomInt = parseInt(rand_num);
-                        var theOne = lista_sugerencias[randomInt];
+                        var theOne = randArrayItem(listaSugerencias);
 
-                        alert(userGuess + " Ese es tu favorito? bueno el mio comienza con las letras: " + theOne.charAt(0) + theOne.charAt(1));
+                        $("body").append("<div class=\"responseError\">" + "💩 " + userGuess.toUpperCase() + " 💩  " + "Ese es tu favorito? el mio comienza con las letras 👉" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "</div>");
                     }
                 }
             }
@@ -82,18 +145,17 @@ function starwars() {
     }
 }
 
+function returnListaAlmacen() {
+    if (listaAlmacen.length > 0) {
+        for (i = 0; i < listaAlmacen.length; i++) {
+            document.writeln(listaAlmacen[i].toString());
+        }
+    }
+}
+
 // funcion que elige una de las musicas al azar, luego es ocupada en el al final del head del Gulator_Software.html
 function randMusica() {
-    var lista_musica = new Array;
-
-    lista_musica[0] = '<midi-player src="midis/jazz.mid" sound-font></midi-player>';
-    lista_musica[1] = '<midi-player src="midis/cool.mid" sound-font></midi-player>';
-    lista_musica[2] = '<midi-player src="midis/bios.mid" sound-font></midi-player>';
-
-    var rand_num = Math.random() * lista_musica.length;
-    var num_music = parseInt(rand_num);
-    var the_music = lista_musica[num_music];
-
+    var the_music = randArrayItem(listaMusica);
     return the_music;
 }
 
@@ -104,5 +166,20 @@ function startScroller() {
     // This editable setting dictates how quickly
     // each character moves across the scroll box
     // (ex. 150=.15 seconds).
-    setTimeout("startScroller()", 150)
+    setTimeout("startScroller()", 200)
+}
+
+function randArrayItem(array) {
+    var rand_num = Math.random() * array.length;
+    var randomInt = parseInt(rand_num);
+    return array[randomInt];
+}
+
+function testJquery() {
+    $(document).ready(function () {
+        $("#test2").toggle();
+        $(window).resize(function () {
+            $("body").prepend("<div>" + $(window).width() + "</div>");
+        });
+    });
 }

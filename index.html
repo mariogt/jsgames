@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.22.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
     <link rel="stylesheet" href="style.css">
@@ -11,25 +12,38 @@
     <title>MarioGT JSGames!</title>
 </head>
 
-<body onload="startScroller();">
-    Bienvenido
-    <script language="JavaScript" type="text/javascript">document.writeln(askName());</script>
-    <form name="scrollForm" onsubmit="return false">
+<body onload="startScroller()">
+    <div class="c0">
+        <kbd>
+            <script>document.writeln(askName());</script>
+        </kbd>
+    </div>
+    <form name="scrollForm" id="scrollerBox" onsubmit="return false">
         <!--This editable value is the size of the text box. -->
-        <input type="text" name="scrolling_message" value="" size="200">
+        <input type="text" id="scrollerBox" name="scrolling_message" size="80">
     </form>
-    <br>
-    <!-- <h1>Entretenimientos <a href="#" onclick="starwars();return false;">StarWars Trivia</a></h1> -->
     <br>
     <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script>
     <br>
 
-    <form onsubmit="return false">
-        <label for="input"></label>Enter your starwars guess: </label>
-        <input id="textbox" placeholder="enter your guess.." required>
-        <input type="submit" onclick="starwars()" value="Submit">
-    </form>
-
+    <div class="c1">
+        <form onsubmit="return false">
+            <label for="input"></label>
+            <div class="c1"><kbd>Adivina mis
+                    <script>document.writeln(getListaStarwarsLenght());</script> Personajes de Starwars:
+                </kbd></div>
+            <input type="text" id="textbox" placeholder="...">
+            <input type="submit" id="sendbutton" onclick="starwars()" value="GO">
+        </form>
+    </div>
+    <!-- <br>
+    <br>
+    <br>
+    <br>
+    <input type="button" onclick="returnListaAlmacen();return false" value="go">
+    <input type="button" id="test1" onclick="testJquery()" value="test1">
+    <input type="button" id="test2" onclick="" value="test2">
+    <input type="button" id="test3" onclick="" value="test3"> -->
 </body>
 
 </html>

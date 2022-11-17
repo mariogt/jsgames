@@ -1,3 +1,221 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #000000;
+    background-color: #ffffff;
+    margin: 0px 20px 0px 20px;
+    /* background-image:url('/Media/arboles_left.gif'); */
+    /* background-repeat:repeat-y; */
+    /* background-attachment: fixed; */
+}
+
+kbd {
+    font-family: Consolas, Menlo, monospace;
+    font-style: bold;
+    padding: 0 4px 0 4px;
+    border: solid 1px grey;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    box-shadow: 2px 2px 2px 2px #ff1493;
+}
+
+img {
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+img:hover {
+    /*transform: rotateZ(150deg);*/
+    opacity: 0.8;
+}
+
+.screenshot img {
+    margin: 10px auto 30px auto;
+    vertical-align: middle;
+    /* border: solid red; */
+}
+
+/* ID */
+
+#scrollerBox {
+    text-align: center;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #d900ff;
+    background-color: #1c2833;
+}
+
+#textbox {
+    text-align: center;
+    height: 70px;
+    width: 200;
+    font-size: 30pt;
+    font-weight: bold;
+    color: #d900ff;
+    background-color: #1c2833;
+}
+
+#sendbutton {
+    text-align: center;
+    height: 70px;
+    width: 50;
+    font-size: 30pt;
+    font-weight: bold;
+    background-color: #d900ff;
+}
+
+/* DIV */
+
+div.response {
+    text-align: center;
+    font-weight: bold;
+    color: rgb(14, 142, 0);
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+div.responseError {
+    text-align: center;
+    font-weight: bold;
+    color: #ff1493;
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+div.responseDuplicate {
+    text-align: center;
+    font-weight: bold;
+    color: #ff4d00;
+    font-size: 25px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+div.screenshot {
+    vertical-align: middle;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+div.todo {
+    width: auto;
+    padding: 10px 0px 0px 0px;
+    border: 0px;
+    margin: 0px 20px 0px 20px;
+    text-align: justify;
+    color: black;
+}
+
+div.copyright {
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    list-style-type: square;
+    margin: 20px auto 20px auto;
+    vertical-align: middle;
+}
+
+div.c0 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.c1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.c2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.c3 {
+    margin-left: 2em
+}
+
+.columnTitle {
+    width: 100%;
+    float: right;
+    margin: 5px 0px 5px 0px;
+    padding: 0px 0px 0px 0px;
+    background-color: #f6f6f6;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.columnContent {
+    width: 46%;
+    float: left;
+    margin: 10px 0px 20px 0px;
+    padding: 0px 0px 0px 20px;
+}
+
+.rest {
+    width: 100%;
+    float: left;
+    margin: 30px 0px 50px 0px;
+    list-style-type: square;
+}
+
+.titlelink {
+    color: #000000
+}
+
+.fullwide {
+    width: 900px;
+}
+
+/* LINK FORMATING */
+
+a:link {
+    color: #e600ac;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #a5037c;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #ff00ff;
+}
+
+a:hover {
+    color: #2e8b57;
+}
+
+a {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+a:hover,
+a:active {
+    opacity: .9;
+    filter: drop-shadow(1px 1px 1px var(white));
+    background-image: linear-gradient(var(#e600ac), var(#a904c7));
+    background-repeat: repeat-x;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23000000' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E") !important;
+    background-position: 0 100%;
+    background-size: .8em auto;
+    text-decoration: none
+}
+
 /* Custom player style */
 midi-player {
     display: block;
@@ -7,7 +225,7 @@ midi-player {
 }
 
 midi-player::part(control-panel) {
-    background: #ff5;
+    background: rgb(47, 0, 38);
     border: 2px solid #000;
     border-radius: 10px 10px 0 0;
 }
@@ -29,4 +247,79 @@ midi-player::part(play-button):hover {
 
 midi-player::part(time) {
     font-family: monospace;
+}
+
+/* *********** DARK MODE *********** */
+
+@media (prefers-color-scheme: dark) {
+
+    /* Overrides for Dark Mode. */
+    body {
+        color: #d7dbdd;
+        background: #17202a;
+        margin: 0px 20px 0px 20px;
+    }
+
+    kbd {
+        font-family: Consolas, Menlo, monospace;
+        padding: 0 4px 0 4px;
+        border: solid 1px grey;
+        border-radius: 4px;
+        color: #00f00f;
+        background-color: black;
+        box-shadow: 2px 2px 2px 2px #00ff00;
+    }
+
+    div.todo {
+        width: auto;
+        padding: 10px;
+        border: 0px;
+        margin: 30px;
+        text-align: justify;
+        color: #d7dbdd;
+    }
+
+    div.copyright {
+        font-size: 14px;
+        list-style-type: square;
+    }
+
+    .columnTitle {
+        width: 100%;
+        float: left;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 20px;
+        color: white;
+        background-color: #1c2833;
+    }
+
+    .titlelink {
+        color: #000000
+    }
+
+    /* LINK FORMATING */
+
+    a:link {
+        color: #e600ac;
+    }
+
+    /* unvisited link */
+
+    a:visited {
+        color: #a904c7;
+    }
+
+    /* visited link */
+
+    a:hover {
+        color: #00ff00;
+    }
+
+    /* mouse over link */
+
+    a:active {
+        color: #a904c7;
+    }
+
+    /* selected link */
 }
