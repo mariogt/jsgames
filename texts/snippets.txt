@@ -1,0 +1,18 @@
+// include another js file
+
+$.getScript("my_lovely_script.js", function() {
+   alert("Script loaded but not necessarily executed.");
+});
+
+// real time timer
+var timerId = setInterval(() => {
+getTime()
+}, 1000);
+
+<form name="scrollForm" id="scrollerBox" onsubmit="return false">
+    <!--This editable value is the size of the text box. -->
+<input type="text" id="scrollerBox" name="scrolling_message" size="80">
+</form>
+<br>
+<script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script>
+<br>

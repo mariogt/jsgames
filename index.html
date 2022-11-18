@@ -5,36 +5,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.22.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <!-- <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.22.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script> -->
     <link rel="stylesheet" href="style.css">
     </link>
     <title>MarioGT JSGames!</title>
 </head>
 
-<body onload="startScroller()">
+<body onload="setFocusOnTextbox()">
     <p id="timer">...</p>
     <div class="c0">
         <kbd>
             <script>document.writeln(askName());</script>
         </kbd>
     </div>
-    <form name="scrollForm" id="scrollerBox" onsubmit="return false">
-        <!--This editable value is the size of the text box. -->
-        <input type="text" id="scrollerBox" name="scrolling_message" size="80">
-    </form>
-    <br>
-    <!-- <script language="JavaScript" type="text/javascript">document.writeln(randMusica());</script> -->
-    <br>
     <div class="c1">
-        <form onsubmit="return false">
+        <form id="form" onsubmit="return false">
             <label for="input"></label>
-            <div class="c1"><kbd>Adivina mis
+            <div class="c1" id="formLabel"><kbd>Adivina mis
                     <script>document.writeln(getListaStarwarsLenght());</script> Personajes de Starwars:
                 </kbd></div>
-            <input type="text" id="textbox" placeholder="...">
-            <input type="submit" id="sendbutton" onclick="starwars();setTimeout(fadeHtmlText, 3000);timeInterval()"
-                value="GO">
+            <input type="text" id="textbox" placeholder="">
+            <input type="submit" id="sendbutton" onclick="starwars();fadeHtmlText()" value="GO">
         </form>
     </div>
     <!-- <br>

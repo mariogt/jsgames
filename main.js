@@ -1,15 +1,16 @@
-// reloj tiempo real
-// var timerId = setInterval(() => {
-//     getTime()
-// }, 1000);
+//  main.js
+//  Created by Mario Gajardo Tassara --> 17-11-2022 -- 17:43
+//
+//  Game of remember - html + css + javascript + jquery
+//
+//  Copyright (c) 2022 MarioGT Software.
+//
+//  GNU AFFERO GENERAL PUBLIC LICENSE
+//  https://www.gnu.org/licenses/agpl-3.0.txt
 
-// timeInterval(100);
 
+// defines
 var msg = "Adivina los nombres de los personajes de Starwars, escribe el nombre en la caja de texto y presiona la tecla \"Enter\" o el boton \"GO\". Cada vez que falles te dare una pista con las dos primeras letras de algun personaje de mi lista, buena suerte 🐱";
-
-var userName = new String;
-var matchCounter = 0;
-var userGuess;
 
 const namesArray = new Array(
     'PsychoCherry🍒',
@@ -80,14 +81,26 @@ const listaStarwars = new Array(
     'obiwan',
     'lando'
 );
-const listaStarwarsCounter = listaStarwars.length;
 
+// user vars
+var userName = new String;
+var matchCounter = 0;
+var userGuess;
+
+// arrays
+const listaStarwarsCounter = listaStarwars.length;
 var listaAlmacen = new Array;
 var listaSugerencias = [...listaStarwars];
+
+// timers
+var timeCounter = 30;
+var progressBarId;
+
 
 function getListaStarwarsLenght() {
     return listaStarwarsCounter;
 }
+
 function askName() {
     //userName = prompt("Cual es tu nombre?", "");
     if (userName.length == 0 || userName == null) {
@@ -97,18 +110,19 @@ function askName() {
 }
 
 function starwars() {
+    timeInterval()
     userGuess = document.getElementById("textbox").value;
     document.getElementById("textbox").value = '';
 
     var isGuessInList = false;
     if (matchCounter == listaStarwarsCounter) {
-        alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
+        cajaTextoFadeOut();
+        setTimeout(winWinSetup, 2000);
     } else {
         if (userGuess == null) {
             alert("Te diste por vencido!");
         } else {
             if (userGuess == "") {
-                //alert("No recuerdas ninguno? intenta nuevamente");
             } else {
                 listaAlmacen.forEach(inFunction);
                 function inFunction(item, index) {
@@ -128,7 +142,8 @@ function starwars() {
                             $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " de " + listaStarwarsCounter + " personajes de mi lista" + "</div>");
 
                             if (matchCounter == listaStarwarsCounter) {
-                                alert("Felicitaciones " + userName + "! GANASTE THE STARWARS TRIVIA!");
+                                cajaTextoFadeOut();
+                                setTimeout(winWinSetup, 2000);
                             }
                         }
                     }
@@ -150,6 +165,33 @@ function starwars() {
             }
         }
     }
+}
+
+function winWinSetup() {
+    document.getElementById("timer").innerHTML = "FIN";
+    clearInterval(progressBarId);
+    timeCounter = 0;
+
+    $("body").append("<div class=\"winWin\">" + "Felicitaciones " + userName + "! GANASTE! 🐱😹🍻" + "</div>");
+
+    $(".winWin").fadeToggle(1000, "linear", function () {
+        $(".winWin").fadeToggle(1000, "linear", function () {
+            $(".winWin").fadeToggle(1000, "linear", function () {
+                $(".winWin").fadeToggle(1000, "linear", function () {
+                    $(".winWin").fadeIn(1000);
+                });
+            });
+        });
+    });
+}
+
+function cajaTextoFadeOut() {
+    $("#form").fadeOut("slow", function () {
+        $("#textbox").fadeOut("slow", function () {
+            $("#sendbutton").fadeOut("fast", function () {
+            });
+        });
+    });
 }
 
 function returnListaAlmacen() {
@@ -191,13 +233,13 @@ function testJquery() {
 
 function fadeHtmlText() {
     $(document).ready(function () {
-        $(".response").fadeOut("slow", function () {
+        $(".response").fadeOut(2000, function () {
             // Animation complete
         });
-        $(".responseError").fadeOut("slow", function () {
+        $(".responseError").fadeOut(2000, function () {
             // Animation complete
         });
-        $(".responseDuplicate").fadeOut("slow", function () {
+        $(".responseDuplicate").fadeOut(2000, function () {
             // Animation complete
         });
     });
@@ -209,8 +251,6 @@ function getTime() {
     document.getElementById("timer").innerHTML = currentTime;
 }
 
-var timeCounter = 10;
-var progressBarId;
 function timeInterval() {
     if (progressBarId == null) {
         $(document).ready(function () {
@@ -223,13 +263,15 @@ function displayTimeProgress() {
     document.getElementById("timer").innerHTML = timeCounter;
     timeCounter -= 1;
     if (timeCounter == 0) {
-        $("#textbox").fadeOut("fast", function () {
-        });
-        $("#sendbutton").fadeOut("fast", function () {
-        });
+        cajaTextoFadeOut();
         document.getElementById("timer").innerHTML = "FIN";
         clearInterval(progressBarId);
         timeCounter = 0;
     }
 }
 
+function setFocusOnTextbox() {
+    $(document).ready(function () {
+        document.getElementById("textbox").focus();
+    });
+}
