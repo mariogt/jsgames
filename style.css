@@ -30,12 +30,6 @@ img:hover {
     opacity: 0.8;
 }
 
-.screenshot img {
-    margin: 10px auto 30px auto;
-    vertical-align: middle;
-    /* border: solid red; */
-}
-
 /* ID */
 
 #timer {
@@ -77,7 +71,7 @@ img:hover {
 
 /* DIV */
 
-div.response {
+.response {
     text-align: center;
     font-weight: bold;
     color: rgb(14, 142, 0);
@@ -86,7 +80,7 @@ div.response {
     margin-bottom: 20px;
 }
 
-div.responseError {
+.responseError {
     text-align: center;
     font-weight: bold;
     color: #ff1493;
@@ -95,7 +89,7 @@ div.responseError {
     margin-bottom: 20px;
 }
 
-div.responseDuplicate {
+.responseDuplicate {
     text-align: center;
     font-weight: bold;
     color: #ff4d00;
@@ -104,7 +98,7 @@ div.responseDuplicate {
     margin-bottom: 20px;
 }
 
-div.winWin {
+.winWin {
     text-align: center;
     font-weight: bold;
     color: #eaff00;
@@ -113,14 +107,20 @@ div.winWin {
     margin-bottom: 20px;
 }
 
-div.screenshot {
+.screenshot {
     vertical-align: middle;
     text-align: center;
     margin-top: 30px;
     margin-bottom: 40px;
 }
 
-div.todo {
+.screenshot img {
+    margin: 10px auto 30px auto;
+    vertical-align: middle;
+    /* border: solid red; */
+}
+
+.todo {
     width: auto;
     padding: 10px 0px 0px 0px;
     border: 0px;
@@ -129,7 +129,7 @@ div.todo {
     color: black;
 }
 
-div.copyright {
+.copyright {
     font-size: 14px;
     font-style: italic;
     text-align: center;
@@ -138,7 +138,7 @@ div.copyright {
     vertical-align: middle;
 }
 
-div.c0 {
+.c0 {
     text-align: center;
     font-weight: bold;
     font-size: 45px;
@@ -146,7 +146,7 @@ div.c0 {
     margin-bottom: 60px;
 }
 
-div.c1 {
+.c1 {
     text-align: center;
     font-weight: bold;
     font-size: 35px;
@@ -154,7 +154,7 @@ div.c1 {
     margin-bottom: 20px;
 }
 
-div.c2 {
+.c2 {
     text-align: center;
     font-weight: bold;
     font-size: 18px;
@@ -162,7 +162,7 @@ div.c2 {
     margin-bottom: 20px;
 }
 
-div.c3 {
+.c3 {
     margin-left: 2em
 }
 
@@ -289,7 +289,7 @@ midi-player::part(time) {
         box-shadow: 2px 2px 2px 2px #00ff00;
     }
 
-    div.todo {
+    .todo {
         width: auto;
         padding: 10px;
         border: 0px;
@@ -298,7 +298,7 @@ midi-player::part(time) {
         color: #d7dbdd;
     }
 
-    div.copyright {
+    .copyright {
         font-size: 14px;
         list-style-type: square;
     }

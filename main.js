@@ -93,7 +93,7 @@ var listaAlmacen = new Array;
 var listaSugerencias = [...listaStarwars];
 
 // timers
-var timeCounter = 30;
+var timeCounter = 35;
 var progressBarId;
 
 
@@ -107,6 +107,13 @@ function askName() {
         userName = randArrayItem(namesArray);
     }
     return userName;
+}
+
+function initialSetup() {
+    $(document).ready(function () {
+        document.getElementById("textbox").focus();
+        document.getElementById("sendbutton").hidden = true;
+    });
 }
 
 function starwars() {
@@ -159,7 +166,7 @@ function starwars() {
             if (!isGuessInList) {
                 var theOne = randArrayItem(listaSugerencias);
 
-                $("body").append("<div class=\"responseError\">" + "❌ Error! te dare una pista, comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
+                $("body").append("<div class=\"responseError\">" + "🧟‍♀️🙈 Te dare una pista! comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
             }
         }
     }
@@ -186,7 +193,6 @@ function winWinSetup() {
 
 function loseLose() {
     cajaTextoFadeOut();
-    document.getElementById("textbox").value = "";
     document.getElementById("timer").innerHTML = "FIN";
     clearInterval(progressBarId);
     timeCounter = 0;
@@ -195,8 +201,7 @@ function loseLose() {
 function cajaTextoFadeOut() {
     $("#form").fadeOut("slow", function () {
         $("#textbox").fadeOut("slow", function () {
-            $("#sendbutton").fadeOut("fast", function () {
-            });
+            document.getElementById("textbox").value = "";
         });
     });
 }
@@ -262,12 +267,6 @@ function displayTimeProgress() {
     if (timeCounter == 0) {
         loseLose();
     }
-}
-
-function setFocusOnTextbox() {
-    $(document).ready(function () {
-        document.getElementById("textbox").focus();
-    });
 }
 
 function testJquery() {
