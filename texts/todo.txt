@@ -1,5 +1,7 @@
 (17-11-2022 -- 17:54)
 
 - implementar funcion de win, animacion u otro elemento (fixed by MarioGT) 17-11-2022 -- 23:25
+- limpiar campo texto luego de ganar o perder (fixed by MarioGT) 18-11-2022 -- 00:03
+- poner en uppercase nombre de jugar en textos (fixed by MarioGT) 18-11-2022 -- 00:04
 - implementar imagenes de personajes como clue durante un timer
 - implementar niveles de dificultad

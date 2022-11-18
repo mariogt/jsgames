@@ -111,57 +111,55 @@ function askName() {
 
 function starwars() {
     timeInterval()
-    userGuess = document.getElementById("textbox").value;
+
+    var tempString1 = document.getElementById("textbox").value;
+    var tempString2 = tempString1.trimStart();
+    var tempString3 = tempString2.trimEnd();
+    userGuess = tempString3.toLowerCase();
+
     document.getElementById("textbox").value = '';
 
     var isGuessInList = false;
-    if (matchCounter == listaStarwarsCounter) {
-        cajaTextoFadeOut();
-        setTimeout(winWinSetup, 2000);
+
+    if (userGuess == "") {
+        // void
     } else {
-        if (userGuess == null) {
-            alert("Te diste por vencido!");
-        } else {
-            if (userGuess == "") {
-            } else {
-                listaAlmacen.forEach(inFunction);
-                function inFunction(item, index) {
-                    if (userGuess == item) {
-                        $("body").append("<div class=\"responseDuplicate\">" + "🐵 Ya dijiste ese personaje, trata de nuevo! 🐵" + "</div>");
-                        isGuessInList = true;
+        listaAlmacen.forEach(inFunction);
+        function inFunction(item, index) {
+            if (userGuess == item) {
+                $("body").append("<div class=\"responseDuplicate\">" + "🐵 Ya dijiste ese personaje!" + "</div>");
+                isGuessInList = true;
+            }
+        }
+
+        if (!isGuessInList) {
+            for (i = 0; i < listaStarwarsCounter; i++) {
+                if (userGuess == listaStarwars[i]) {
+                    matchCounter++;
+                    listaAlmacen.push(listaStarwars[i]);
+                    isGuessInList = true;
+
+                    $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " personajes de " + listaStarwarsCounter + "</div>");
+
+                    if (matchCounter == listaStarwarsCounter) {
+                        cajaTextoFadeOut();
+                        setTimeout(winWinSetup, 2000);
                     }
                 }
+            }
 
-                if (!isGuessInList) {
-                    for (i = 0; i < listaStarwarsCounter; i++) {
-                        if (userGuess == listaStarwars[i]) {
-                            matchCounter++;
-                            listaAlmacen.push(listaStarwars[i]);
-                            isGuessInList = true;
-
-                            $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " de " + listaStarwarsCounter + " personajes de mi lista" + "</div>");
-
-                            if (matchCounter == listaStarwarsCounter) {
-                                cajaTextoFadeOut();
-                                setTimeout(winWinSetup, 2000);
-                            }
-                        }
-                    }
-
-                    for (i = 0; i < listaAlmacen.length; i++) {
-                        for (j = 0; j < listaSugerencias.length; j++) {
-                            if (listaSugerencias[j] == listaAlmacen[i]) {
-                                listaSugerencias.splice(j, 1);
-                            }
-                        }
-                    }
-
-                    if (!isGuessInList) {
-                        var theOne = randArrayItem(listaSugerencias);
-
-                        $("body").append("<div class=\"responseError\">" + "💩 " + userGuess.toUpperCase() + " 💩  " + "Ese es tu favorito? el mio comienza con las letras 👉" + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con la letra: " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
+            for (i = 0; i < listaAlmacen.length; i++) {
+                for (j = 0; j < listaSugerencias.length; j++) {
+                    if (listaSugerencias[j] == listaAlmacen[i]) {
+                        listaSugerencias.splice(j, 1);
                     }
                 }
+            }
+
+            if (!isGuessInList) {
+                var theOne = randArrayItem(listaSugerencias);
+
+                $("body").append("<div class=\"responseError\">" + "❌ Error! te dare una pista, comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
             }
         }
     }
@@ -169,10 +167,11 @@ function starwars() {
 
 function winWinSetup() {
     document.getElementById("timer").innerHTML = "FIN";
+    document.getElementById("textbox").value = "";
     clearInterval(progressBarId);
     timeCounter = 0;
 
-    $("body").append("<div class=\"winWin\">" + "Felicitaciones " + userName + "! GANASTE! 🐱😹🍻" + "</div>");
+    $("body").append("<div class=\"winWin\">" + "Felicitaciones " + userName.toUpperCase() + "! GANASTE! 🐱😹🍻" + "</div>");
 
     $(".winWin").fadeToggle(1000, "linear", function () {
         $(".winWin").fadeToggle(1000, "linear", function () {
@@ -183,6 +182,14 @@ function winWinSetup() {
             });
         });
     });
+}
+
+function loseLose() {
+    cajaTextoFadeOut();
+    document.getElementById("textbox").value = "";
+    document.getElementById("timer").innerHTML = "FIN";
+    clearInterval(progressBarId);
+    timeCounter = 0;
 }
 
 function cajaTextoFadeOut() {
@@ -202,7 +209,6 @@ function returnListaAlmacen() {
     }
 }
 
-// funcion que elige una de las musicas al azar, luego es ocupada en el al final del head del Gulator_Software.html
 function randMusica() {
     var the_music = randArrayItem(listaMusica);
     return the_music;
@@ -222,24 +228,15 @@ function randArrayItem(array) {
     return array[randomInt];
 }
 
-function testJquery() {
-    $(document).ready(function () {
-        $("#respError").toggle();
-        $(window).resize(function () {
-            $("body").prepend("<div>" + $(window).width() + "</div>");
-        });
-    });
-}
-
 function fadeHtmlText() {
     $(document).ready(function () {
-        $(".response").fadeOut(2000, function () {
+        $(".response").fadeOut(3000, function () {
             // Animation complete
         });
-        $(".responseError").fadeOut(2000, function () {
+        $(".responseError").fadeOut(3000, function () {
             // Animation complete
         });
-        $(".responseDuplicate").fadeOut(2000, function () {
+        $(".responseDuplicate").fadeOut(3000, function () {
             // Animation complete
         });
     });
@@ -263,15 +260,21 @@ function displayTimeProgress() {
     document.getElementById("timer").innerHTML = timeCounter;
     timeCounter -= 1;
     if (timeCounter == 0) {
-        cajaTextoFadeOut();
-        document.getElementById("timer").innerHTML = "FIN";
-        clearInterval(progressBarId);
-        timeCounter = 0;
+        loseLose();
     }
 }
 
 function setFocusOnTextbox() {
     $(document).ready(function () {
         document.getElementById("textbox").focus();
+    });
+}
+
+function testJquery() {
+    $(document).ready(function () {
+        $("#respError").toggle();
+        $(window).resize(function () {
+            $("body").prepend("<div>" + $(window).width() + "</div>");
+        });
     });
 }
