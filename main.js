@@ -63,13 +63,13 @@ const randUserNames = new Array(
     'vloco🕺',
 );
 
-const listaMusica = new Array(
+const musicArray = new Array(
     '<midi-player src=\"midis/jazz.mid\" sound-font></midi-player>',
     '<midi-player src=\"midis/cool.mid\" sound-font></midi-player>',
     '<midi-player src=\"midis/bios.mid\" sound-font></midi-player>',
 );
 
-const starwarsChars = new Array(
+const swCharsArray = new Array(
     {
         name: 'darth vader',
         image: 'images/darth.png'
@@ -118,30 +118,30 @@ var matchCounter = 0;
 var userGuess;
 
 // arrays
-const listaStarwarsCounter = starwarsChars.length;
-var listaAlmacen = new Array;
-var listaSugerencias = [...starwarsChars];
+const swCharsArrayLenght = swCharsArray.length;
+var swUserArray = new Array;
+var swHintsArray = [...swCharsArray];
 
 // timers
 var progressBarId;
-var timeCounter = 100;
-const imagesHintTime = 10000;
+var timeCounter = 50;
+const imagesHintTime = 7000;
 
 
 function createImagesGrid() {
-    for (let i = 0; i < starwarsChars.length; i++) {
+    for (let i = 0; i < swCharsArray.length; i++) {
         const swImage = document.createElement('img');
-        swImage.setAttribute('src', starwarsChars[i].image);
-        swImage.setAttribute('id', starwarsChars[i].name)
+        swImage.setAttribute('src', swCharsArray[i].image);
+        swImage.setAttribute('id', swCharsArray[i].name)
         grid.appendChild(swImage);
     }
-    for (let i = 0; i < starwarsChars.length; i++) {
-        $(document.getElementById(starwarsChars[i].name)).fadeToggle(imagesHintTime);
+    for (let i = 0; i < swCharsArray.length; i++) {
+        $(document.getElementById(swCharsArray[i].name)).fadeToggle(imagesHintTime);
     }
 }
 
-function getListaStarwarsLenght() {
-    return listaStarwarsCounter;
+function getSwCharsArrayLenght() {
+    return swCharsArrayLenght;
 }
 
 function askName() {
@@ -156,8 +156,6 @@ function initialSetup() {
     $(document).ready(function () {
         document.getElementById("textbox").focus();
         document.getElementById("sendbutton").hidden = true;
-
-        const grid = document.getElementById("grid");
         createImagesGrid();
     });
 }
@@ -177,7 +175,7 @@ function starwars() {
     if (userGuess == "") {
         // void
     } else {
-        listaAlmacen.forEach(inFunction);
+        swUserArray.forEach(inFunction);
         function inFunction(item, index) {
             if (userGuess == item) {
                 $("body").append("<div class=\"responseDuplicate\">" + "🐵 Ya dijiste ese personaje!" + "</div>");
@@ -186,33 +184,33 @@ function starwars() {
         }
 
         if (!isGuessInList) {
-            for (let i = 0; i < listaStarwarsCounter; i++) {
-                if (userGuess == starwarsChars[i].name) {
+            for (let i = 0; i < swCharsArrayLenght; i++) {
+                if (userGuess == swCharsArray[i].name) {
                     matchCounter++;
-                    listaAlmacen.push(starwarsChars[i].name);
+                    swUserArray.push(swCharsArray[i].name);
                     isGuessInList = true;
 
-                    $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " personajes de " + listaStarwarsCounter + "</div>");
+                    $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " personajes de " + swCharsArrayLenght + "</div>");
 
-                    $(document.getElementById(starwarsChars[i].name)).fadeToggle(500);
+                    $(document.getElementById(swCharsArray[i].name)).fadeToggle(500);
 
-                    if (matchCounter == listaStarwarsCounter) {
-                        cajaTextoFadeOut();
-                        setTimeout(winWinSetup, 2000);
+                    if (matchCounter == swCharsArrayLenght) {
+                        textboxFadeOut();
+                        setTimeout(winSetup, 2000);
                     }
                 }
             }
 
-            for (let i = 0; i < listaAlmacen.length; i++) {
-                for (let j = 0; j < listaSugerencias.length; j++) {
-                    if (listaSugerencias[j].name == listaAlmacen[i]) {
-                        listaSugerencias.splice(j, 1);
+            for (let i = 0; i < swUserArray.length; i++) {
+                for (let j = 0; j < swHintsArray.length; j++) {
+                    if (swHintsArray[j].name == swUserArray[i]) {
+                        swHintsArray.splice(j, 1);
                     }
                 }
             }
 
             if (!isGuessInList) {
-                var theOne = listaSugerencias[randArrayItem(listaSugerencias.length)].name;
+                var theOne = swHintsArray[randArrayItem(swHintsArray.length)].name;
 
                 $("body").append("<div class=\"responseError\">" + "🧟‍♀️🙈 Te dare una pista! comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
             }
@@ -220,7 +218,7 @@ function starwars() {
     }
 }
 
-function winWinSetup() {
+function winSetup() {
     document.getElementById("timer").innerHTML = "FIN";
     document.getElementById("textbox").value = "";
     clearInterval(progressBarId);
@@ -239,16 +237,16 @@ function winWinSetup() {
     });
 }
 
-function loseLose() {
-    cajaTextoFadeOut();
+function loseSetup() {
+    textboxFadeOut();
     $(".grid").fadeOut("slow", function () {
     });
-    document.getElementById("timer").innerHTML = "FIN";
+    document.getElementById("timer").innerHTML = "😿 You Lose!";
     clearInterval(progressBarId);
     timeCounter = 0;
 }
 
-function cajaTextoFadeOut() {
+function textboxFadeOut() {
     $("#form").fadeOut("slow", function () {
         $("#textbox").fadeOut("slow", function () {
             document.getElementById("textbox").value = "";
@@ -256,17 +254,17 @@ function cajaTextoFadeOut() {
     });
 }
 
-function returnListaAlmacen() {
-    if (listaAlmacen.length > 0) {
-        for (let i = 0; i < listaAlmacen.length; i++) {
-            document.writeln(listaAlmacen[i].toString());
+function returnSwUserArray() {
+    if (swUserArray.length > 0) {
+        for (let i = 0; i < swUserArray.length; i++) {
+            document.writeln(swUserArray[i].toString());
         }
     }
 }
 
-function randMusica() {
-    var the_music = randArrayItem(listaMusica);
-    return the_music;
+function randMusic() {
+    var gameMusic = musicArray[randArrayItem(musicArray.length)];
+    return gameMusic;
 }
 
 // scroller
@@ -315,7 +313,7 @@ function displayTimeProgress() {
     document.getElementById("timer").innerHTML = timeCounter;
     timeCounter -= 1;
     if (timeCounter == 0) {
-        loseLose();
+        loseSetup();
     }
 }
 
