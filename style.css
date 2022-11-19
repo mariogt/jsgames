@@ -71,6 +71,14 @@ img:hover {
 
 /* DIV */
 
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    height: 200px;
+    justify-content: center;
+}
+
 .response {
     text-align: center;
     font-weight: bold;

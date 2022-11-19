@@ -8,11 +8,10 @@
 //  GNU AFFERO GENERAL PUBLIC LICENSE
 //  https://www.gnu.org/licenses/agpl-3.0.txt
 
-
 // defines
 var msg = "Adivina los nombres de los personajes de Starwars, escribe el nombre en la caja de texto y presiona la tecla \"Enter\" o el boton \"GO\". Cada vez que falles te dare una pista con las dos primeras letras de algun personaje de mi lista, buena suerte 🐱";
 
-const namesArray = new Array(
+const randUserNames = new Array(
     'PsychoCherry🍒',
     'Mintymint☘️',
     'lemonSquezee🍋',
@@ -70,16 +69,47 @@ const listaMusica = new Array(
     '<midi-player src=\"midis/bios.mid\" sound-font></midi-player>',
 );
 
-const listaStarwars = new Array(
-    'darth vader',
-    'yoda',
-    'boba fett',
-    'han solo',
-    'jaba',
-    'leia',
-    'luke',
-    'obiwan',
-    'lando'
+const starwarsChars = new Array(
+    {
+        name: 'darth vader',
+        image: 'images/darth.png'
+    },
+    {
+        name: 'boba fett',
+        image: 'images/fett.png'
+    },
+    {
+        name: 'yoda',
+        image: 'images/yoda.png'
+    },
+    {
+        name: 'luke',
+        image: 'images/luke.png'
+    },
+    {
+        name: 'lando',
+        image: 'images/lando.png'
+    },
+    {
+        name: 'leia',
+        image: 'images/leia.png'
+    },
+    {
+        name: 'obiwan',
+        image: 'images/obiwan.png'
+    },
+    {
+        name: 'jabba',
+        image: 'images/jabba.png'
+    },
+    {
+        name: 'baby yoda',
+        image: 'images/babyyoda.png'
+    },
+    {
+        name: 'ewok',
+        image: 'images/ewok.png'
+    }
 );
 
 // user vars
@@ -88,14 +118,27 @@ var matchCounter = 0;
 var userGuess;
 
 // arrays
-const listaStarwarsCounter = listaStarwars.length;
+const listaStarwarsCounter = starwarsChars.length;
 var listaAlmacen = new Array;
-var listaSugerencias = [...listaStarwars];
+var listaSugerencias = [...starwarsChars];
 
 // timers
-var timeCounter = 35;
 var progressBarId;
+var timeCounter = 100;
+const imagesHintTime = 10000;
 
+
+function createImagesGrid() {
+    for (let i = 0; i < starwarsChars.length; i++) {
+        const swImage = document.createElement('img');
+        swImage.setAttribute('src', starwarsChars[i].image);
+        swImage.setAttribute('id', starwarsChars[i].name)
+        grid.appendChild(swImage);
+    }
+    for (let i = 0; i < starwarsChars.length; i++) {
+        $(document.getElementById(starwarsChars[i].name)).fadeToggle(imagesHintTime);
+    }
+}
 
 function getListaStarwarsLenght() {
     return listaStarwarsCounter;
@@ -104,7 +147,7 @@ function getListaStarwarsLenght() {
 function askName() {
     //userName = prompt("Cual es tu nombre?", "");
     if (userName.length == 0 || userName == null) {
-        userName = randArrayItem(namesArray);
+        userName = randUserNames[randArrayItem(randUserNames.length)]
     }
     return userName;
 }
@@ -113,6 +156,9 @@ function initialSetup() {
     $(document).ready(function () {
         document.getElementById("textbox").focus();
         document.getElementById("sendbutton").hidden = true;
+
+        const grid = document.getElementById("grid");
+        createImagesGrid();
     });
 }
 
@@ -140,13 +186,15 @@ function starwars() {
         }
 
         if (!isGuessInList) {
-            for (i = 0; i < listaStarwarsCounter; i++) {
-                if (userGuess == listaStarwars[i]) {
+            for (let i = 0; i < listaStarwarsCounter; i++) {
+                if (userGuess == starwarsChars[i].name) {
                     matchCounter++;
-                    listaAlmacen.push(listaStarwars[i]);
+                    listaAlmacen.push(starwarsChars[i].name);
                     isGuessInList = true;
 
                     $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " personajes de " + listaStarwarsCounter + "</div>");
+
+                    $(document.getElementById(starwarsChars[i].name)).fadeToggle(500);
 
                     if (matchCounter == listaStarwarsCounter) {
                         cajaTextoFadeOut();
@@ -155,16 +203,16 @@ function starwars() {
                 }
             }
 
-            for (i = 0; i < listaAlmacen.length; i++) {
-                for (j = 0; j < listaSugerencias.length; j++) {
-                    if (listaSugerencias[j] == listaAlmacen[i]) {
+            for (let i = 0; i < listaAlmacen.length; i++) {
+                for (let j = 0; j < listaSugerencias.length; j++) {
+                    if (listaSugerencias[j].name == listaAlmacen[i]) {
                         listaSugerencias.splice(j, 1);
                     }
                 }
             }
 
             if (!isGuessInList) {
-                var theOne = randArrayItem(listaSugerencias);
+                var theOne = listaSugerencias[randArrayItem(listaSugerencias.length)].name;
 
                 $("body").append("<div class=\"responseError\">" + "🧟‍♀️🙈 Te dare una pista! comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
             }
@@ -193,6 +241,8 @@ function winWinSetup() {
 
 function loseLose() {
     cajaTextoFadeOut();
+    $(".grid").fadeOut("slow", function () {
+    });
     document.getElementById("timer").innerHTML = "FIN";
     clearInterval(progressBarId);
     timeCounter = 0;
@@ -208,7 +258,7 @@ function cajaTextoFadeOut() {
 
 function returnListaAlmacen() {
     if (listaAlmacen.length > 0) {
-        for (i = 0; i < listaAlmacen.length; i++) {
+        for (let i = 0; i < listaAlmacen.length; i++) {
             document.writeln(listaAlmacen[i].toString());
         }
     }
@@ -227,10 +277,10 @@ function startScroller() {
     setTimeout("startScroller()", 200)
 }
 
-function randArrayItem(array) {
-    var rand_num = Math.random() * array.length;
+function randArrayItem(length) {
+    var rand_num = Math.random() * length;
     var randomInt = parseInt(rand_num);
-    return array[randomInt];
+    return randomInt;
 }
 
 function fadeHtmlText() {
