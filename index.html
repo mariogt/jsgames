@@ -2,37 +2,37 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script src="main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src="main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- <script
         src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.22.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script> -->
-    <link rel="stylesheet" href="style.css">
-    </link>
-    <title>MarioGT JSGames!</title>
+  <link rel="stylesheet" href="style.css">
+  </link>
+  <title>MarioGT JSGames!</title>
 </head>
 
 <body onload="initialSetup()">
-    <p id="timer">...</p>
-    <div class="c0">
-        <kbd>
-            <script>document.writeln(askName());</script>
-        </kbd>
-    </div>
-    <div class="c1">
-        <form id="form" onsubmit="return false">
-            <label for="input"></label>
-            <div class="c1" id="formLabel"><kbd>Adivina mis
-                    <script>document.writeln(getSwCharsArrayLenght());</script> Personajes de Starwars:
-                </kbd></div>
-            <input type="text" id="textbox" autocomplete=”off” placeholder="">
-            <input type="submit" id="sendbutton" onclick="starwars();fadeHtmlText()" value="GO">
-        </form>
-    </div>
-    <center>
-        <div class="grid" id="grid"></div>
-    </center>
-    <!-- <br>
+  <p id="timer">...</p>
+  <div class="c0">
+    <kbd>
+      <script>document.writeln(askName());</script>
+    </kbd>
+  </div>
+  <div class="c1">
+    <form id="form" onsubmit="return false">
+      <label for="input"></label>
+      <div class="c1" id="formLabel"><kbd>Guess the
+          <script>document.writeln(getSwCharsArrayLenght());</script> Starwars Characters:
+        </kbd></div>
+      <input type="text" id="textbox" autocomplete="off" placeholder="">
+      <input type="submit" id="sendbutton" onclick="starwars();fadeHtmlText()" value="GO">
+    </form>
+  </div>
+  <center>
+    <div class="grid" id="grid"></div>
+  </center>
+  <!-- <br>
     <br>
     <br>
     <br>

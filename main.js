@@ -9,7 +9,7 @@
 //  https://www.gnu.org/licenses/agpl-3.0.txt
 
 // defines
-var msg = "Adivina los nombres de los personajes de Starwars, escribe el nombre en la caja de texto y presiona la tecla \"Enter\" o el boton \"GO\". Cada vez que falles te dare una pista con las dos primeras letras de algun personaje de mi lista, buena suerte 🐱";
+var msg = "Guess the names of the Starwars characters, write the name in the text box and press the \"Enter\" key or the \"GO\" button. Every time you fail I will give you a clue with the first two letters of a character on my list, good luck 🐱";
 
 const randUserNames = new Array(
     'PsychoCherry🍒',
@@ -145,7 +145,7 @@ function getSwCharsArrayLenght() {
 }
 
 function askName() {
-    //userName = prompt("Cual es tu nombre?", "");
+    //userName = prompt("What is your name?", "");
     if (userName.length == 0 || userName == null) {
         userName = randUserNames[randArrayItem(randUserNames.length)]
     }
@@ -178,7 +178,7 @@ function starwars() {
         swUserArray.forEach(inFunction);
         function inFunction(item, index) {
             if (userGuess == item) {
-                $("body").append("<div class=\"responseDuplicate\">" + "🐵 Ya dijiste ese personaje!" + "</div>");
+                $("body").append("<div class=\"responseDuplicate\">" + "🐵 you already said that character!" + "</div>");
                 isGuessInList = true;
             }
         }
@@ -190,7 +190,7 @@ function starwars() {
                     swUserArray.push(swCharsArray[i].name);
                     isGuessInList = true;
 
-                    $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Muy bien! has acertado a " + matchCounter + " personajes de " + swCharsArrayLenght + "</div>");
+                    $("body").append("<div class=\"response\">" + "👉" + userGuess.toUpperCase() + "👈  " + "🐱 Very good! you have hit " + matchCounter + "  characters out of " + swCharsArrayLenght + "</div>");
 
                     $(document.getElementById(swCharsArray[i].name)).fadeToggle(500);
 
@@ -212,7 +212,7 @@ function starwars() {
             if (!isGuessInList) {
                 var theOne = swHintsArray[randArrayItem(swHintsArray.length)].name;
 
-                $("body").append("<div class=\"responseError\">" + "🧟‍♀️🙈 Te dare una pista! comienza con 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + " y termina con 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
+                $("body").append("<div class=\"responseError\">" + "🧟‍♀️🙈 I'll give you a clue! starts with 👉 " + "\"" + theOne.charAt(0).toUpperCase() + theOne.charAt(1).toUpperCase() + "\"" + "  and ends with 👉 " + "\"" + theOne.charAt(theOne.length - 1).toUpperCase() + "\"" + "</div>");
             }
         }
     }
@@ -224,7 +224,7 @@ function winSetup() {
     clearInterval(progressBarId);
     timeCounter = 0;
 
-    $("body").append("<div class=\"winWin\">" + "Felicitaciones " + userName.toUpperCase() + "! GANASTE! 🐱😹🍻" + "</div>");
+    $("body").append("<div class=\"winWin\">" + "Congrats! " + userName.toUpperCase() + "! YOU WIN! 🐱😹🍻" + "</div>");
 
     $(".winWin").fadeToggle(1000, "linear", function () {
         $(".winWin").fadeToggle(1000, "linear", function () {
